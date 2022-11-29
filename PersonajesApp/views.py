@@ -46,3 +46,13 @@ def creacion(request):
     return render(request, 'creacion.html', {"creacion":creacion})
 
 
+def busquedaPersonaje(request):
+    return render(request, "busquedaPersonaje.html")
+
+def buscar(request):
+    if request.GET["nombre"]:
+        nombre = request.GET["nombre"]
+        personajes = DatosPersonaje.objects.filter(nombre__icontains = nombre)
+        return render(request, "resultadosBusqueda.html", {"personajes": personajes})
+    else:
+        return render(request, "busquedaPersonaje.html", {"mensaje":"Por favor ingrese un nombre"})
