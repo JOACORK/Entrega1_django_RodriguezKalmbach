@@ -3,12 +3,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from PersonajesApp.forms import CrearPersonaje
 from PersonajesApp.models import *
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
 def inicio(request):
     return render(request, 'inicio.html')
 
+@login_required
 def creacion(request):
     if request.method == "POST":
         creacion = CrearPersonaje(request.POST)
@@ -45,10 +47,11 @@ def creacion(request):
         
     return render(request, 'creacion.html', {"creacion":creacion})
 
-
+@login_required
 def busquedaPersonaje(request):
     return render(request, "busquedaPersonaje.html")
 
+@login_required
 def buscar(request):
     if request.GET["nombre"]:
         nombre = request.GET["nombre"]

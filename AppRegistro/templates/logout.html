@@ -21,72 +21,34 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'creacion' %}">Creacion</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'busquedaPersonaje' %}">Busqueda</a></li>
-                        {% if user.is_authenticated %}
-                        
-                        <li class="nav-item"><a class="nav-link" href="{% url 'Logout' %}">Desloguearse</a></li>
-                        <p style="color:white"> Hola {{ user.username }} </p>
-                        {% else %}
-                        <li class="nav-item"><a class="nav-link-danger" href="{% url 'login' %}">Login</a></li>
-                        {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- Header-->
         <header class="bg-primary bg-gradient text-white">
-            <div class="container px-4 text-center">
-                <h1 class="fw-bolder">Bienvenido a tu creador de personajes!</h1>
-                <p class="lead">Tal como leiste, podrás crear personajes ficticios! Con que objetivo? Ninguno!</p>
-
-
-                {% if user.is_authenticated %}
-                <a class="btn btn-lg btn-dark" href="{% url 'creacion' %}">Crea un personaje!</a>
-                <a class="btn btn-lg btn-light" href="{% url 'busquedaPersonaje' %}">Buscá un personaje!</a>
-                {% endif %}
-
-
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">               
+                         <h1>Usuario {{ usuario.nombre }} Deslogueado</h1>
+                    </div>
+                </div>
             </div>
+
+
         </header>
         <!-- About section-->
         <section id="about">
             <div class="container px-4">
                 <div class="row gx-4 justify-content-center">
-                    <div class="col-lg-8" id="crearPJ">
-                 
-                        {% block contenidoEleccion %}
-
-
-                        {% endblock %}
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Services section-->
-        <section class="bg-light" id="services">
-            <div class="container px-4">
-                <div class="row gx-4 justify-content-center">
-                    <div class="col-lg-8">
-                        {% block contenidoResultadoBusqueda %}
+                    <div class="col-lg-8">               
                         
-                        {% endblock %}
-                    </div>
-                </div>
+                    <a class="btn btn-lg btn-dark" href="{% url 'login' %}">Volve a loguearte!</a>
             </div>
+        </div>
+    </div>
         </section>
-        <!-- Contact section-->
-        <section id="contact">
-            <div class="container px-4">
-                <div class="row gx-4 justify-content-center">
-                    <div class="col-lg-8">
-                        {% block resultadoBusqueda %}
-                        
-                        {% endblock %}
-                    </div>
-                </div>
-            </div>
-        </section>
+
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
@@ -97,3 +59,4 @@
         <script src="{% static 'js/scripts.js' %}"></script>
     </body>
 </html>
+

@@ -17,3 +17,4 @@ class CrearPersonaje(forms.Form):
     familia = forms.CharField(max_length=50)
     antiguedad = forms.IntegerField(help_text="Años de existencia de la familia")
     profesionFamilia = forms.MultipleChoiceField(choices = OPCIONES_PROFESIONES_FAMILIA)
+

@@ -1,0 +1,23 @@
+{% extends './padre.html' %}
+
+{% load static %}
+
+{% block contenidoEleccion %}
+
+    <h2>Login usuario</h2>
+
+    <form action="{% url 'login' %}" method="POST"> {% csrf_token %}
+            
+        <table>
+            {{ form.as_table }}
+        </table>
+
+        <input type="submit" value="Ingresar">
+    </form>
+    
+    {{ mensaje }}
+    <div class="row gx-4 justify-content-center ">
+        <a class="btn btn-lg btn-light" href="{% url 'signup' %}">No tenes usuario? Create uno!</a>
+    </div>
+    
+{% endblock %}
