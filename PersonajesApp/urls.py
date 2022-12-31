@@ -4,7 +4,8 @@ from AppRegistro.views import *
 
 urlpatterns = [
     path("", inicio, name="inicio"),
-    path("creacion/", creacion, name="creacion"),
+    path("creacionFamilia/", creacionFamilia, name="creacionFamilia"),
+    path("creacionPj/", creacionPj, name="creacionPj"),    
     path("busquedaPersonaje/", busquedaPersonaje, name= "busquedaPersonaje"),
     path("buscar/",buscar, name="buscar"),
 ]

@@ -17,4 +17,18 @@ class CrearPersonaje(forms.Form):
     familia = forms.CharField(max_length=50)
     antiguedad = forms.IntegerField(help_text="Años de existencia de la familia")
     profesionFamilia = forms.MultipleChoiceField(choices = OPCIONES_PROFESIONES_FAMILIA)
+    
+class CrearPj(forms.Form):
+    nombre = forms.CharField(max_length=50)
+    raza=forms.MultipleChoiceField(choices = OPCIONES_RAZAS)
+    edad = forms.IntegerField()
+    altura = forms.FloatField()
+    peso = forms.IntegerField()
+    profesion = forms.MultipleChoiceField(choices = OPCIONES_PROFESIONES_PJ)
+    expertis = forms.MultipleChoiceField(choices = OPCIONES_EXPERTIS)
+    renombre = forms.MultipleChoiceField(choices = OPCIONES_RENOMBRE)
 
+class CrearFamilia(forms.Form):
+    familia = forms.CharField(max_length=50)
+    antiguedad = forms.IntegerField(help_text="Años de existencia de la familia")
+    profesionFamilia = forms.MultipleChoiceField(choices = OPCIONES_PROFESIONES_FAMILIA)

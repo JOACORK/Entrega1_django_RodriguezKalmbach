@@ -21,8 +21,8 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'creacion' %}">Creacion</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'busquedaPersonaje' %}">Busqueda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'creacionPj' %}">Creacion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'busquedaPersonaje' %}">Baul</a></li>
                         {% if user.is_authenticated %}
                         
                         <li class="nav-item"><a class="nav-link" href="{% url 'Logout' %}">Desloguearse</a></li>
@@ -42,8 +42,8 @@
 
 
                 {% if user.is_authenticated %}
-                <a class="btn btn-lg btn-dark" href="{% url 'creacion' %}">Crea un personaje!</a>
-                <a class="btn btn-lg btn-light" href="{% url 'busquedaPersonaje' %}">Buscá un personaje!</a>
+                <a class="btn btn-lg btn-dark" href="{% url 'creacionPj' %}">Crea un personaje!</a>
+                <a class="btn btn-lg btn-light" href="{% url 'busquedaPersonaje' %}">Baul de personajes!</a>
                 {% endif %}
 
 
