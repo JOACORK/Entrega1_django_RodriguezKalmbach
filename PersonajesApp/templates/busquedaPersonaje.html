@@ -12,4 +12,16 @@
 
     {{ mensaje }}
 
+    {% if personajes %}
+    <ul>
+    {% for personaje in personajes %}
+    <li>{{ personaje.nombre }}</li>
+    <li>{{ personaje.raza }}</li>
+    <li>{{ personaje.edad }}</li>
+    <br>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p> Todavía no se ha creado ningún personaje!</p>
+    {% endif %}
 {% endblock %}

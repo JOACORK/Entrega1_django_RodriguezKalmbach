@@ -32,3 +32,15 @@ class CrearFamilia(forms.Form):
     familia = forms.CharField(max_length=50)
     antiguedad = forms.IntegerField(help_text="Años de existencia de la familia")
     profesionFamilia = forms.MultipleChoiceField(choices = OPCIONES_PROFESIONES_FAMILIA)
+
+class CrearHistoria(forms.Form):
+        id_personaje = forms.CharField(max_length=50)
+        nombre = forms.CharField(max_length=50)
+        raza = forms.CharField(max_length=50)
+        edad = forms.CharField(max_length=50)
+        altura = forms.CharField(max_length=50)
+        peso = forms.CharField(max_length=50)
+        id_familia = forms.CharField(max_length=50)
+        familia = forms.CharField(max_length=50)
+        antiguedad = forms.CharField(max_length=50)
+        profesion_familia = forms.CharField(max_length=50)

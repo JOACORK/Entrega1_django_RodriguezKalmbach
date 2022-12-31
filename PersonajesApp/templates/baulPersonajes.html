@@ -1,0 +1,56 @@
+{% extends './padre.html' %}
+{% load static %}
+
+{% block contenidoEleccion %}
+
+    <h2>Baul de {{ user.username }}</h2>
+    
+    {% if personajes %}
+
+    <table class="table table-condensed table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Raza</th>
+                <th>Edad</th>
+                <th>Profesion</th>
+                <th>Expertis Profesion</th>
+                <th>Renombre</th>
+                <th>Familia</th>
+                <th>Antigüedad Familia</th>
+                <th>Profesión Familia</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for fila in personajes %}
+                <tr>
+                    <td>{{ fila.0 }}</td>
+                    <td>{{ fila.1 }}</td>
+                    <td>{{ fila.2 }}</td>
+                    <td>{{ fila.3 }}</td>
+                    <td>{{ fila.4 }}</td>
+                    <td>{{ fila.5 }}</td>
+                    <td>{{ fila.6 }}</td>
+                    <td>{{ fila.7 }}</td>
+                    <td>{{ fila.8 }}</td>
+                    <td>{{ fila.9 }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-outline-success" href="{% url 'creadorHistoria' %}">Crear Historia</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        </ul>
+    {% else %}
+    <p> Todavía no se ha creado ningún personaje!</p>
+    {% endif %}
+
+
+
+    
+
+
+{% endblock %}

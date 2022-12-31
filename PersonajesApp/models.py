@@ -10,8 +10,7 @@ class DatosPersonaje(models.Model):
     edad = models.IntegerField()
     altura = models.FloatField()
     peso = models.IntegerField()
-    #usuario = models.ForeignKey(User, on_delete=models.CASCADE,related_name="usernames")
-
+    usuario = models.CharField(max_length=50)
     def __str__(self):
         return self.nombre
 
@@ -22,7 +21,8 @@ class DatosFamilia(models.Model):
     familia= models.CharField(max_length=50)
     antiguedad = models.CharField(max_length=50)
     profesionFamilia = models.CharField(max_length=50)
-
+    
+    
     def __str__(self):
         return self.familia
         
@@ -45,3 +45,6 @@ class Relacion_personaje_profesion(models.Model):
     idPersonaje = models.ForeignKey(DatosPersonaje, on_delete=models.CASCADE)
     idProfesion = models.ForeignKey(DatosProfesion, on_delete=models.CASCADE)
     
+class HistoriaPersonaje(models.Model):
+    idPersonaje = models.ForeignKey(DatosPersonaje, on_delete=models.CASCADE)
+    historia = models.TextField()

@@ -22,13 +22,15 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'creacionPj' %}">Creacion</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'busquedaPersonaje' %}">Baul</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'baulPersonajes' %}">Baul</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'busquedaPersonaje' %}">Busqueda</a></li>
                         {% if user.is_authenticated %}
                         
                         <li class="nav-item"><a class="nav-link" href="{% url 'Logout' %}">Desloguearse</a></li>
                         <p style="color:white"> Hola {{ user.username }} </p>
                         {% else %}
                         <li class="nav-item"><a class="nav-link-danger" href="{% url 'login' %}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link-danger" href="{% url 'signup' %}">Crear Usuario</a></li>
                         {% endif %}
                     </ul>
                 </div>
@@ -43,7 +45,7 @@
 
                 {% if user.is_authenticated %}
                 <a class="btn btn-lg btn-dark" href="{% url 'creacionPj' %}">Crea un personaje!</a>
-                <a class="btn btn-lg btn-light" href="{% url 'busquedaPersonaje' %}">Baul de personajes!</a>
+                <a class="btn btn-lg btn-light" href="{% url 'baulPersonajes' %}">Baul de personajes!</a>
                 {% endif %}
 
 
