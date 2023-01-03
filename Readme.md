@@ -1,12 +1,17 @@
-# Entrega Intermedia Proyecto Final
+# Entrega Proyecto Final
 ## _Web Django con patron MVT_
 
-Este proyecto está siendo desarrollado en el marco del curso de Python de CODERHOUSE. El mismo busca aplicar los conocimientos adquiridos durante la cursada, utilizando el framework Django para el desarrollo de una página web. 
+Este proyecto fue desarrollado por Joaquín Rodríguez Kalmbach en el marco del curso de Python de CODERHOUSE. El mismo busca aplicar los conocimientos adquiridos durante la cursada, utilizando el framework Django para el desarrollo de una página web. 
 
 ## Funcionalidades
-Para esta entrega intermedia, la web cuenta con dos funcionalidades básicas
+Para esta entrega, la web cuenta con las siguientes funcionalidades básicas
+- Creación de usuario
+- Login y logout
 - Creación de personajes ficticios a partir de un formulario
 - Búsqueda de los personajes creados a partir de sus nombres
+- Baul inventario de personajes
+- Mensajería entre usuarios de la aplicación
+- Posibilidad de editar y eliminar personajes por parte de un super usuario
 
 > Se pretende crear a futuro la funcionalidad de desarrollar historias de personajes a partir de un determinado input. Para esto se piensa explorar el uso de APIs de inteligencia artifical que puedan vincularse a la web para desarrollar texto/imágenes u otros resultados posibles. 
 
@@ -25,6 +30,13 @@ Alojadas en la hoja urls.py
 - creacion.html --> Renderización de formulario para creación de personaje
 - padre.html --> Renderización Padre, el cual se hereda al resto de htmls.
 - resultadosBusqueda.html --> Renderización de resultados de búsqueda
+
+### App AppRegistro
+Aloja los Modelos, las Vistas, Urls y Templates necesarios para la Creación, el Login y el Logout de usuarios.
+
+### App AppMensajeria
+Aloja los modelos, las views y templates necesarios para el envío y la lectura de mensajería
+
 
 ## Tecnologías
 
