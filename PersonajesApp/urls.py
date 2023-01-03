@@ -9,6 +9,10 @@ urlpatterns = [
     path("busquedaPersonaje/", busquedaPersonaje, name= "busquedaPersonaje"),
     path("baulPersonajes/", baulPersonajes, name= "baulPersonajes"),
     path("buscar/",buscar, name="buscar"),
-    path("creadorHistoria/",creadorHistoria, name="creadorHistoria"),
+    path("creadorHistoria/<personaje_id>/",creadorHistoria, name="creadorHistoria"),
+    path("eliminarPersonaje/<personaje_id>/",eliminarPersonaje, name="eliminarPersonaje"),
+    path("editarPersonaje/<personaje_id>/<profesion_id>/<familia_id>/",editarPersonaje, name="editarPersonaje"),
+    
+    
     
 ]

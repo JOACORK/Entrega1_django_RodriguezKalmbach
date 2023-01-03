@@ -1,0 +1,33 @@
+{% extends './padre.html' %}
+{% load static %}
+
+{% block contenidoEleccion %}
+    <div class="container">
+
+    <h2>Buzon mensajes</h2>
+    {% if mensajeria %}
+    {% for mensaje in mensajeria %}
+        <div class= "col">
+            <div class="row-md-4 mx-auto">
+                <div class="card-deck">
+                    <div class="card" >
+                        <div class="card-body">
+                            <h5 class="card-title">Enviado por: {{ mensaje.remitente }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Fecha: {{ mensaje.fecha_envio }}</h6>
+                            <p class="card-text">Mensaje: {{ mensaje.cuerpo }}</p>
+                            <a href=" {% url 'responder_mensajes' mensaje.remitente %}" class="btn btn-sm btn-outline-success">Responder</a>
+                            <a href="{% url 'eliminar_mensajes' mensaje.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>       
+        </div>
+    
+    {% endfor %}
+    {% else %}
+    <p> No ha recibido ningún mensaje</p>
+    {% endif %}
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends './padre.html' %}
+{% load static %}
+
+{% block contenidoEleccion %}
+    <h2> {{ mensaje }} </h2>
+
+    <ul> 
+    {% for mensaje in mensajeria %}
+        <li>
+            {{ mensaje }}
+        </li> 
+    {% endfor %}
+    </ul>
+
+    <h2>Mensajería</h2>
+    <div class="container">
+        <div class="row">
+            <form action="{% url 'enviar_mensaje' %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Enviar</button>
+                <a class="btn btn-sm btn-dark" href="{% url 'leer_mensajes' %}">Leer mensaje recibidos</a>
+            </form>
+        </div>
+    </div>
+    
+{% endblock %}

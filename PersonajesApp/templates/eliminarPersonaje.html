@@ -1,0 +1,24 @@
+{% extends './padre.html' %}
+{% load static %}
+
+{% block contenidoEleccion %}
+
+    
+    <h2>Creación Personaje</h2>
+
+    {% if creacion.error %}
+    <h2>Los datos son erroneos</h2>
+    {% endif%}
+
+    <form action="" method="POST"> {% csrf_token %}
+
+        <table>
+
+            {{ creacion.as_table }}
+
+        </table>
+
+        <input type="submit" value="Enviar">
+    </form>
+
+{% endblock %}

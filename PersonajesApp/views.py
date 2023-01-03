@@ -39,11 +39,7 @@ def creacionPj(request):
 
             # guardar usuario
             usuario = request.user
-            #nombre_usuario = usuario.first_name
 
-            #print(usuario)
-            
-            #time.sleep(10)
 
             # Crea personaje y profesion            
             personaje, creado = DatosPersonaje.objects.get_or_create(nombre=nombre,raza= raza, edad = edad,  altura = altura,peso = peso,usuario=usuario)
@@ -62,11 +58,8 @@ def creacionPj(request):
             Relacion_personaje_profesion.objects.create(idPersonaje=idPersonaje, idProfesion=idProfesion)
 
             # Para pasar a la creación de la familia
-            #creacionFamilia = CrearFamilia()
-
             return redirect("creacionFamilia")
 
-#            return render(request,"creacionFamilia.html",{"creacion":creacionFamilia,"mensaje" : "Personaje Creado!"})
     else:
         creacion = CrearPj()
     
@@ -128,19 +121,10 @@ def baulPersonajes(request):
     return render(request, "baulPersonajes.html", {"personajes": personajes})
     """
     # Crear la consulta JOIN en lenguaje MySQL
-    consulta = f"""
-        SELECT a.idPersonaje,a.nombre,a.raza,a.edad,e.profesion,e.expertis,e.renombre,c.familia,c.antiguedad,c.profesionFamilia
-        FROM PersonajesApp_datospersonaje as a
-        INNER JOIN PersonajesApp_relacion_personaje_familia as b ON a.idPersonaje = b.idPersonaje_id
-        INNER JOIN PersonajesApp_datosfamilia as c ON b.idFamilia_id = c.idFamilia 
-        INNER JOIN PersonajesApp_relacion_personaje_profesion as d on a.idPersonaje = d.idPersonaje_id
-        INNER JOIN PersonajesApp_datosprofesion as e on d.idProfesion_id = e.idProfesion
-        WHERE a.usuario = '{usuario}'
-    """
-
-    # Ejecutar la consulta y obtener el resultado
-    resultado = connection.cursor().execute(consulta)
-    
+    if request.user.is_superuser:
+        resultado = consulta_admin_personajes_sql(usuario)
+    else:
+        resultado = consulta_personajes_sql(usuario)
     filas = []
     for fila in resultado:
         filas.append(fila)
@@ -148,26 +132,96 @@ def baulPersonajes(request):
     #print(filas[0])
     return render(request, "baulPersonajes.html", {"personajes": filas})
 
-def creadorHistoria(request): 
-    #TODO CREAR VISTA EN DONDE PUEDA ENVIAR LOS DATOS DE UNA FILA Y DESPUES ENVIAR A CREAR UNA HSITORIA sino enviar el prompt cuando se crea el personaje ya horrarme este paso       
-    if request.method == "POST":
-        creacion = creadorHistoria(request.POST)
-        if creacion.is_valid():
-            informacion = creacion.cleaned_data
-            print(informacion)
-            """id_personaje = request.POST.get('id_personaje')
-            nombre = request.POST.get('nombre')
-            raza = request.POST.get('raza')
-            edad = request.POST.get('edad')
-            altura = request.POST.get('altura')
-            peso = request.POST.get('peso')
-            id_familia = request.POST.get('id_familia')
-            familia = request.POST.get('familia')
-            antiguedad = request.POST.get('antiguedad')
-            profesion_familia = request.POST.get('profesion_familia')"""
-        
-        return render(request, "creadorHistoria.html", {"nombre": nombre})
+def creadorHistoria(request, personaje_id): 
+    #TODO Obtener valores del id
+    # impactar en gpt3 
+     
+    usuario = request.user
 
+    consulta_personaje_sql(usuario,personaje_id)
+    pass
+
+def eliminarPersonaje(request, personaje_id):
+    usuario = request.user
+    personaje = DatosPersonaje.objects.get(idPersonaje= personaje_id)
+   
+    personaje.delete()
+    print(personaje)
+    personajes = DatosPersonaje.objects.all()
+    #print(personajes)
+
+    resultado = consulta_admin_personajes_sql(usuario)    
+    filas = []
+    for fila in resultado:
+        filas.append(fila)
+
+    #print(filas[0])
+    return render(request, "baulPersonajes.html", {"personajes": filas})
+    
+    
+
+def editarPersonaje(request, personaje_id,profesion_id,familia_id):
+    #TODO poder editar personaje
+    personaje = DatosPersonaje.objects.get(idPersonaje= personaje_id)
+    profesion = DatosProfesion.objects.get(idProfesion= profesion_id)
+    familia = DatosFamilia.objects.get(idFamilia = familia_id)
+    if request.method == "POST":
+        formulario_personaje = CrearPj(request.POST)
+        if formulario_personaje.is_valid():
+            
+            informacion = formulario_personaje.cleaned_data
+            personaje.nombre = informacion["nombre"] 
+            personaje.raza= informacion["raza"]
+            personaje.edad =  informacion["edad"]
+            personaje.altura =  informacion["altura"]
+            personaje.peso =  informacion["peso"]
+            profesion.profesion =  informacion["profesion"]
+            profesion.expertis =  informacion["expertis"]
+            profesion.renombre =  informacion["renombre"]
+            familia.familia = informacion["familia"]
+            familia.idFamilia =informacion["idFamilia"]
+            familia.antiguedad = informacion["antiguedad"]
+            familia.profesionFamilia=informacion["profesionFamilia"] 
+            personaje.save()
+            profesion.save()
+            
+            formulario_familia = CrearFamilia(initial={"familia": familia.familia,"antiguedad":familia.antiguedad,"profesionFamilia":familia.profesionFamilia})
+        return render(request,"creacionFamilia.html",{"creacion":formulario_familia})
     else:
-        nombre="get"
-    return render(request, "creadorHistoria.html", {"nombre": nombre})
+        personaje = CrearPj(initial={"nombre":personaje.nombre,"raza":personaje.raza,"edad":personaje.edad,"altura":personaje.altura,"peso":personaje.peso,"profesion":profesion.profesion,"expertis":profesion.expertis,"renombre":profesion.renombre})
+    return render(request,"creacionPj.html",{"creacion":personaje})
+
+
+def consulta_personaje_sql(usuario,idPersonaje):
+        # Crear la consulta JOIN en lenguaje MySQL
+    consulta = f"""
+        SELECT a.idPersonaje,a.nombre,a.raza,a.edad,e.profesion,e.expertis,e.renombre,c.familia,c.antiguedad,c.profesionFamilia,e.idProfesion, c.idFamilia
+        FROM PersonajesApp_datospersonaje as a
+        INNER JOIN PersonajesApp_relacion_personaje_familia as b ON a.idPersonaje = b.idPersonaje_id
+        INNER JOIN PersonajesApp_datosfamilia as c ON b.idFamilia_id = c.idFamilia 
+        INNER JOIN PersonajesApp_relacion_personaje_profesion as d on a.idPersonaje = d.idPersonaje_id
+        INNER JOIN PersonajesApp_datosprofesion as e on d.idProfesion_id = e.idProfesion
+        WHERE a.usuario = '{usuario}' and a.idPersonaje = '{idPersonaje}';
+    """
+
+    # Ejecutar la consulta y obtener el resultado
+    resultado = connection.cursor().execute(consulta)
+    
+    return resultado
+
+def consulta_admin_personajes_sql(usuario):
+        # Crear la consulta JOIN en lenguaje MySQL
+    consulta = f"""
+        SELECT a.idPersonaje,a.nombre,a.raza,a.edad,e.profesion,e.expertis,e.renombre,c.familia,c.antiguedad,c.profesionFamilia,a.usuario, e.idProfesion, c.idFamilia
+        FROM PersonajesApp_datospersonaje as a
+        INNER JOIN PersonajesApp_relacion_personaje_familia as b ON a.idPersonaje = b.idPersonaje_id
+        INNER JOIN PersonajesApp_datosfamilia as c ON b.idFamilia_id = c.idFamilia 
+        INNER JOIN PersonajesApp_relacion_personaje_profesion as d on a.idPersonaje = d.idPersonaje_id
+        INNER JOIN PersonajesApp_datosprofesion as e on d.idProfesion_id = e.idProfesion
+        ;
+    """
+
+    # Ejecutar la consulta y obtener el resultado
+    resultado = connection.cursor().execute(consulta)
+    
+    return resultado

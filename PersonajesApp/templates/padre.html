@@ -21,11 +21,11 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}">Inicio</a></li>
+                        {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'creacionPj' %}">Creacion</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'baulPersonajes' %}">Baul</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'busquedaPersonaje' %}">Busqueda</a></li>
-                        {% if user.is_authenticated %}
-                        
+                        <li class="nav-item"><a class="nav-link" href="{% url 'mensajeria' %}">Mensajería</a></li>                        
                         <li class="nav-item"><a class="nav-link" href="{% url 'Logout' %}">Desloguearse</a></li>
                         <p style="color:white"> Hola {{ user.username }} </p>
                         {% else %}

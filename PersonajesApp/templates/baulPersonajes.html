@@ -6,7 +6,10 @@
     <h2>Baul de {{ user.username }}</h2>
     
     {% if personajes %}
-
+    <div class = "container">
+        <div class= "col">
+            <div class= "class="row-md-4 mx-auto"">
+       <div class= "table-responsive">
     <table class="table table-condensed table-bordered table-hover">
         <thead>
             <tr>
@@ -20,6 +23,11 @@
                 <th>Familia</th>
                 <th>Antigüedad Familia</th>
                 <th>Profesión Familia</th>
+                {% if user.is_superuser %}
+                <th>Usuario</th>
+                <th>Id Profesion</th>
+                <th>Id Familia</th>
+                {% endif %}
                 
             </tr>
         </thead>
@@ -36,13 +44,35 @@
                     <td>{{ fila.7 }}</td>
                     <td>{{ fila.8 }}</td>
                     <td>{{ fila.9 }}</td>
-                    <td>
-                        <a class="btn btn-sm btn-outline-success" href="{% url 'creadorHistoria' %}">Crear Historia</a>
+                    {% if user.is_superuser %}
+                    <td>{{ fila.10 }}</td>
+                    <td>{{ fila.11 }}</td>
+                    <td>{{ fila.12 }}</td>
+                    <td>   
+                        <a class="btn btn-sm btn-outline-danger" href="{% url 'eliminarPersonaje' fila.0 %}">Eliminar Personaje</a>
                     </td>
+                    <td>   
+                        <a class="btn btn-sm btn-outline-warning" href="{% url 'editarPersonaje' fila.0 fila.11 fila.12 %}">Editar Personaje</a>
+                    </td>
+                    {% endif %}
+
+                    <td> 
+                        <a class="btn btn-sm btn-outline-success" href="{% url 'baulPersonajes' %}">Crear Historia</a>
+                     </td>
+                     <td> 
+                        <a class="btn btn-sm btn-success" href="{% url 'baulPersonajes' %}">Ver Detalle</a>
+                     </td>
+                    
                 </tr>
+                
             {% endfor %}
         </tbody>
     </table>
+</div>
+    </div>
+    </div>
+    </div>
+    <a class="btn btn-m btn-success" href="{% url 'creacionPj' %}">Agregar otro Personaje</a>
         </ul>
     {% else %}
     <p> Todavía no se ha creado ningún personaje!</p>
