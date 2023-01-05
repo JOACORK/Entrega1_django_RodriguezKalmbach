@@ -1,39 +1,48 @@
 # Entrega Intermedia Proyecto Final
 ## _Web Django con patron MVT_
 
-Este proyecto está siendo desarrollado en el marco del curso de Python de CODERHOUSE. El mismo busca aplicar los conocimientos adquiridos durante la cursada, utilizando el framework Django para el desarrollo de una página web. 
+Este proyecto fue diseñado y se encuentra en desarrollo en el marco del curso de Python de CODERHOUSE. Se buscar aplicar los conocimientos adquiridos durante la cursada, utilizando el framework Django para el desarrollo de una página web. 
 
 ## Funcionalidades
-Para esta entrega intermedia, la web cuenta con dos funcionalidades básicas
-- Creación de personajes ficticios a partir de un formulario
-- Búsqueda de los personajes creados a partir de sus nombres
+Para esta entrega, la web cuenta con las siguientes funcionalidades:
+- Creación de usuario
+- Login/Logout
+- Edición de datos personales por parte del usuario
+- Delete de imágenes por parte de super usuario
+- Mensajería entre usuarios
+- Creación de personajes ficticios a partir de formularios
+- Visualización de personajes creados dentro de un inventario
+- Edición de características de personajes
+- Delete de personajes solo por super usuario
+- Creación de hoja de vida de un personaje a través de IA
+- Creación de avatar de personaje a través de IA
 
-> Se pretende crear a futuro la funcionalidad de desarrollar historias de personajes a partir de un determinado input. Para esto se piensa explorar el uso de APIs de inteligencia artifical que puedan vincularse a la web para desarrollar texto/imágenes u otros resultados posibles. 
+
 
 ## Estructura
-### App PersonajesApp
-Posee toda la lógica para la creación y la búsqueda de personajes de la web. Además de la navegación, los templates y los archivos statics del proyecto. 
-#### - Modelos
-Alojados en la hoja models.py, conforman la estructura de la base de datos desarrollada. Se pretende mejorar la estructura para crear campos que relacionen a las distintas clases.
-#### - Vistas
-Alojadas en la hoja views.py, poseen la lógica de trasfondo para navegar, crear personajes y buscar personajes.
-#### - Urls
-Alojadas en la hoja urls.py
-#### - Templates
-- inicio.html --> Renderización de inicio
-- busquedaPersonaje.html --> Renderización de formulario de búsqueda
-- creacion.html --> Renderización de formulario para creación de personaje
-- padre.html --> Renderización Padre, el cual se hereda al resto de htmls.
-- resultadosBusqueda.html --> Renderización de resultados de búsqueda
+>### App PersonajesApp
+>- Posee toda la lógica para la creación y la búsqueda de personajes de la web. CRUD relacionado a personajes. Además de la navegación, los templates y los archivos statics del proyecto.  
+>---
+>### App AppRegisto
+>- Posee la lógica y los modelos para realizar CRUD de usuarios. Gestionar logins y logouts. 
+>---
+>### App AppMensajería
+>- Posee la lógica para el envío, guardado y lectura de mensajes entre usuarios de la plataforma. 
+>---
+>### App AppPerfiles
+> - Posee lógica para visualizar y editar los perfiles de los usuarios.
+> ---
+
 
 ## Tecnologías
 
 Esta web utiliza las siguientes tecnologías
-- [Django] - HTML enhanced for web apps!
-- [Bootstrap] - awesome web-based text editor
-- [chat-gpt3] - IA generación chat
-- [pychatgpt] - wrapper de API chat-gpt 
-
+- [Django] - HTML enhanced for web apps! - [Documentation](https://docs.djangoproject.com/en/4.1/)
+- [Bootstrap] - awesome web-based text editor - [Documentacion](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
+- [chat-gpt3] - IA generación chat - [Documentacion](https://pypi.org/project/pyChatGPT/) 
+- [pychatgpt] - wrapper de API chat-gpt - [Documentacion](https://pypi.org/project/pyChatGPT/) 
+- [Stable_Diffusion] - IA generación de imágenes - [Documentacion](https://huggingface.co/docs/diffusers/installation) 
+- [Replicate] - API wrapper IA generadora de imágenes Stable Diffussion - [Documentacion](https://replicate.com/docs/get-started/python) 
 ## Instalación
 
 Clonar repositorio en su disco local
@@ -43,6 +52,18 @@ cd dillinger
 npm i
 node app
 ```
+Instalar dependencias
+```sh
+# Instalar wrapper de chatGPT3
+pip install pychatgpt
+
+# Instalar wrapper StableDiffusion
+pip install replicate
+
+# La siguiente línea no es necesaria. 
+pip install diffusers transformers accelerate scipy safetensors
+```
+La última línea puede ser una opción para usar StableDiffusion II sin límites de precios. Pero es una solución más compleja para aplicar. Queda en desarrollo.
 
 Correr proyecto en servidor local
 Crear BD
@@ -59,3 +80,5 @@ python manage.py runserver
 
 ```
 
+## Autor
+- Joaquín Rodríguez Kalmbach - Desarrollador
