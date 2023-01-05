@@ -1,0 +1,23 @@
+{% extends './padre.html' %} {% load static %} {% block contenidoEleccion %}
+<section id="about">
+  <div class="container px-4">
+    <div class="row gx-4 justify-content-center">
+      <div class="col-lg-8" id="crearPJ">
+        {% if mensaje %}
+        <h2>{{ mensaje }}</h2>
+        <h3>{{ personaje.nombre }}</h3>
+        <p> {{ historia }} </p>
+        {% else %}
+        <div class="col-lg-8">
+          <h2>Historia Personaje</h2>
+          <p class="lead">
+            <h3>{{ mensaje }}</h3>
+
+          </p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

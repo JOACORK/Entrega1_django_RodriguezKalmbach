@@ -48,3 +48,10 @@ class Relacion_personaje_profesion(models.Model):
 class HistoriaPersonaje(models.Model):
     idPersonaje = models.ForeignKey(DatosPersonaje, on_delete=models.CASCADE)
     historia = models.TextField()
+    
+class AvatarPersonaje(models.Model):
+    idPersonaje = models.ForeignKey(DatosPersonaje, on_delete=models.CASCADE)
+    avatarPersonaje = models.ImageField(upload_to='avataresPersonajes', null=True, blank = True)
+ 
+    def __str__(self):
+        return f"{self.user} - {self.imagen}"

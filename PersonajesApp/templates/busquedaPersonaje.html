@@ -1,27 +1,26 @@
-{% extends './padre.html' %}
-{% load static %}
+{% extends './padre.html' %} {% load static %} {% block contenidoEleccion %}
+<section id="about">
+  <div class="container px-4">
+    <div class="row gx-4 justify-content-center">
+      <div class="col-lg-8" id="crearPJ">
+        <h2>Búsqueda de personajes</h2>
 
-{% block contenidoEleccion %}
+        
 
-    <h2>Búsqueda de personajes</h2>
-
-    <form action="{% url 'buscar' %}" method="GET">
-        <input type="text" name= "nombre" id="nombre">
-        <input type="submit" value="busqueda de personaje">
-    </form>
-
-    {{ mensaje }}
-
-    {% if personajes %}
-    <ul>
-    {% for personaje in personajes %}
-    <li>{{ personaje.nombre }}</li>
-    <li>{{ personaje.raza }}</li>
-    <li>{{ personaje.edad }}</li>
-    <br>
-    {% endfor %}
-    </ul>
-    {% else %}
-    <p> Todavía no se ha creado ningún personaje!</p>
-    {% endif %}
+        {{ mensaje }} {% if personajes %}
+        <ul>
+          {% for personaje in personajes %}
+          <li>{{ personaje.nombre }}</li>
+          <li>{{ personaje.raza }}</li>
+          <li>{{ personaje.edad }}</li>
+          <br />
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>Todavía no se ha creado ningún personaje!</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

@@ -1,0 +1,64 @@
+{% extends './padre.html' %}
+{% load static %}
+
+{% block contenidoEleccion %}
+    
+    {% if user.is_authenticated %}
+    <section class="vh-100" style="background-color: #9de2ff;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-md-9 col-lg-7 col-xl-5">
+              <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-4">
+                  <div class="d-flex text-black">
+                    <div class="flex-shrink-0">
+                        
+                        
+                            <img 
+                            src= "{{ avatar }}"                            
+                                alt="Generic placeholder image" class="img-fluid"  
+                                style="width: 180px; border-radius: 10px;">
+                            
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <h5 class="mb-1">{{ user.username }}</h5>
+                      <p class="mb-2 pb-1" style="color: #2b2a2a;">{{ user.email }}</p>
+                      <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
+                        style="background-color: #efefef;">
+                        <div>
+                          <p class="small text-muted mb-1">Nombre</p>
+                          <p class="mb-0"> {{ user.first_name }}</p>
+                        </div>
+                        <div class="px-3">
+                          <p class="small text-muted mb-1">Apellido</p>
+                          <p class="mb-0">{{ user.last_name }}</p>
+                        </div>
+                        <div>
+                          <p class="small text-muted mb-1">Fecha Creación Cuenta</p>
+                          <p class="mb-0">{{ user.date_joined }}</p>
+                        </div>
+                      </div>
+                      <div class="d-flex pt-1">
+                        <a href="{% url 'editarPerfilUsuario' %}" type="button" class="btn btn-outline-primary me-1 flex-grow-1">Editar datos</a>
+                        <a href="{% url 'cargarAvatar' %}" type="button" class="btn btn-outline-primary me-1 flex-grow-1">Editar Avatar</a>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    {% else %}
+        <div class="col-lg-8">
+            <h2>Contenido en desarrollo</h2>
+            <p class="lead">Considérese privilegiado! Usted fue elegido para poder conocer de antemano este proyecto. El mismo forma parte del curso de Python desarrollado por CODERHOUSE. Por favor sepa disculpar eventuales errores y espero disfrute de la visita! Por ahora la única funcionalidad activa es un prototipo de creación de personajes. Estamos evaluando la posibilidad de agregar nuevas y curiosas funcionalidades.
+            </p>
+        </div>
+    {% endif %}
+    
+
+{% endblock %}

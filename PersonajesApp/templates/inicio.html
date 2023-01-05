@@ -1,15 +1,27 @@
-{% extends './padre.html' %}
-{% load static %}
+{% extends './padre.html' %} {% load static %} {% block contenidoEleccion %}
+<section id="about">
+  <div class="container px-4">
+    <div class="row gx-4 justify-content-center">
+      <div class="col-lg-8" id="crearPJ">
+        {% if mensaje %}
+        <h2>{{ mensaje }}</h2>
+        {% else %}
+        <div class="col-lg-8">
+          <h2>Contenido en desarrollo</h2>
 
-{% block contenidoEleccion %}
-
-
-    <div class="col-lg-8">
-        <h2>Contenido en desarrollo</h2>
-        <p class="lead">Considérese privilegiado! Usted fue elegido para poder conocer de antemano este proyecto. El mismo forma parte del curso de Python desarrollado por CODERHOUSE. Por favor sepa disculpar eventuales errores y espero disfrute de la visita! Por ahora la única funcionalidad activa es un prototipo de creación de personajes. Estamos evaluando la posibilidad de agregar nuevas y curiosas funcionalidades.
-        </p>
+          <p class="lead">
+            Considérese privilegiado! Usted fue elegido para poder conocer de
+            antemano este proyecto. El mismo forma parte del curso de Python
+            desarrollado por CODERHOUSE. Por favor sepa disculpar eventuales
+            errores y espero disfrute de la visita! Por ahora la única
+            funcionalidad activa es un prototipo de creación de personajes.
+            Estamos evaluando la posibilidad de agregar nuevas y curiosas
+            funcionalidades.
+          </p>
+        </div>
+        {% endif %}
+      </div>
     </div>
-
-    {{ mensaje }}
-
+  </div>
+</section>
 {% endblock %}

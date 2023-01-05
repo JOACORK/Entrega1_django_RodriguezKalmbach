@@ -1,0 +1,22 @@
+{% extends "./padre.html" %}
+
+{% load static %}
+
+{% block contenidoEleccion %}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-3">Formulario - Editar Perfil</h1>
+    <h1 class="text-center mb-5">De {{ usuario }}</h1>
+    <form action="" method="POST" class="mx-auto w-75">
+      {% csrf_token %}
+      <table class="table table-bordered">
+        {{ miFormulario.as_table }}
+      </table>
+      <input type="submit" value="Enviar" class="btn btn-primary btn-block">
+    </form>
+  </div>
+
+
+{% endblock %}
+
+

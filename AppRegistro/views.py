@@ -6,10 +6,10 @@ from django.contrib.auth import login, logout,authenticate
 
 #from django.http import HttpResponse
 from AppRegistro.forms import RegistroUsuarioForm
+from AppPerfiles.views import obtener_avatar
 
 from django.contrib.auth.decorators import login_required
 
-#from AppRegistro.models import *
 # Create your views here.
 
 
@@ -21,13 +21,13 @@ def signup(request):
             form.save()
             #TODO Logear automáticamente con el usuario creado con autenticate y login
             
-            return render(request,"inicio.html",{"mensaje":f"Usuario {username} creado correctamente!"})
+            return render(request,"inicio.html",{"mensaje":f"Usuario {username} creado correctamente!","avatar":obtener_avatar(request)})
         else:
-            return render(request,"nuevoUsuario.html",{"form":form,"mensaje":"Error al crear el Usuario"})
+            return render(request,"nuevoUsuario.html",{"form":form,"mensaje":"Error al crear el Usuario","avatar":obtener_avatar(request)})
     else:
         form = RegistroUsuarioForm()
         
-    return render(request, 'nuevoUsuario.html',{"form":form})
+    return render(request, 'nuevoUsuario.html',{"form":form,"avatar":obtener_avatar(request)})
 
 # ----------- Login
 def login_request(request):
@@ -41,7 +41,7 @@ def login_request(request):
             
             if usuario is not None:
                 login(request,usuario)
-                return render(request, "inicio.html",{"mensaje":f"Bienvenido {usuario}"})
+                return render(request, "inicio.html",{"mensaje":f"Bienvenido {usuario}","avatar":obtener_avatar(request)})
             else:
                 return render(request, "login.html",{"mensaje":"Usuario o contraseña incorrectos"})
         else:

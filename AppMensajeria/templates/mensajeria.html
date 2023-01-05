@@ -2,7 +2,12 @@
 {% load static %}
 
 {% block contenidoEleccion %}
-    <h2> {{ mensaje }} </h2>
+
+<section id="about">
+    <div class="container px-4">
+        <div class="row gx-4 justify-content-center">
+            <div class="col-lg-8" id="crearPJ"> 
+<h2> {{ mensaje }} </h2>
 
     <ul> 
     {% for mensaje in mensajeria %}
@@ -23,5 +28,8 @@
             </form>
         </div>
     </div>
-    
+</div>
+</div>
+</div>
+</section>
 {% endblock %}

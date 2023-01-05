@@ -1,20 +1,26 @@
-{% extends './padre.html' %}
-{% load static %}
-
-{% block contenidoEleccion %}
-
-    <h2>Resultados de la búsqueda</h2>
-    {% if personajes %}
-    <ul>
-    {% for personaje in personajes %}
-    <li>{{ personaje.nombre }}</li>
-    <li>{{ personaje.raza }}</li>
-    <li>{{ personaje.edad }}</li>
-    <br>
-    {% endfor %}
-    </ul>
-    {% else %}
-    <p> Todavía no se ha creado ningún personaje con esas características! Pruebe crearlo usted!</p>
-    {% endif %}
-
+{% extends './padre.html' %} {% load static %} {% block contenidoEleccion %}
+<section id="about">
+  <div class="container px-4">
+    <div class="row gx-4 justify-content-center">
+      <div class="col-lg-8" id="crearPJ">
+        <h2>Resultados de la búsqueda</h2>
+        {% if personajes %}
+        <ul>
+          {% for personaje in personajes %}
+          <li>{{ personaje.nombre }}</li>
+          <li>{{ personaje.raza }}</li>
+          <li>{{ personaje.edad }}</li>
+          <br />
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>
+          Todavía no se ha creado ningún personaje con esas características!
+          Pruebe crearlo usted!
+        </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

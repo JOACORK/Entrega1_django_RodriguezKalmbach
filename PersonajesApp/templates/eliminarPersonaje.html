@@ -1,24 +1,25 @@
-{% extends './padre.html' %}
-{% load static %}
+{% extends './padre.html' %} {% load static %} {% block contenidoEleccion %}
+<section id="about">
+  <div class="container px-4">
+    <div class="row gx-4 justify-content-center">
+      <div class="col-lg-8" id="crearPJ">
+        <h2>Creación Personaje</h2>
 
-{% block contenidoEleccion %}
+        {% if creacion.error %}
+        <h2>Los datos son erroneos</h2>
+        {% endif%}
 
-    
-    <h2>Creación Personaje</h2>
+        <form action="" method="POST">
+          {% csrf_token %}
 
-    {% if creacion.error %}
-    <h2>Los datos son erroneos</h2>
-    {% endif%}
-
-    <form action="" method="POST"> {% csrf_token %}
-
-        <table>
-
+          <table>
             {{ creacion.as_table }}
+          </table>
 
-        </table>
-
-        <input type="submit" value="Enviar">
-    </form>
-
+          <input type="submit" value="Enviar" />
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

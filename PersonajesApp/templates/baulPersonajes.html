@@ -2,11 +2,25 @@
 {% load static %}
 
 {% block contenidoEleccion %}
+<section id="about">
+    <div class="container px-4">
+        <div class="row gx-4 justify-content-center">
+            <div class="col-lg-8" id="crearPJ">
+    <h2> {{ mensaje }} </h2>
 
-    <h2>Baul de {{ user.username }}</h2>
+    <div class= "container">    
+        <h2>Busqueda de personajes General</h2>
+
+        <form action="{% url 'buscar' %}" method="GET">
+            <input type="text" name="nombre" id="nombre" />
+            <input type="submit" value="busqueda de personaje" />
+        </form>
+    </div>
+
     
     {% if personajes %}
     <div class = "container">
+        <h2>Baul de {{ user.username }}</h2>
         <div class= "col">
             <div class= "class="row-md-4 mx-auto"">
        <div class= "table-responsive">
@@ -57,14 +71,15 @@
                     {% endif %}
 
                     <td> 
-                        <a class="btn btn-sm btn-outline-success" href="{% url 'baulPersonajes' %}">Crear Historia</a>
+                        <a class="btn btn-sm btn-outline-success" href="{% url 'crearHistoria' fila.0 %}">Crear Historia</a>
+
                      </td>
                      <td> 
-                        <a class="btn btn-sm btn-success" href="{% url 'baulPersonajes' %}">Ver Detalle</a>
+                        <a class="btn btn-sm btn-success" href="{% url 'detallePersonaje' fila.0  %}">Ver Detalle</a>
                      </td>
                     
                 </tr>
-                
+
             {% endfor %}
         </tbody>
     </table>
@@ -72,6 +87,7 @@
     </div>
     </div>
     </div>
+    
     <a class="btn btn-m btn-success" href="{% url 'creacionPj' %}">Agregar otro Personaje</a>
         </ul>
     {% else %}
@@ -80,7 +96,10 @@
 
 
 
-    
+</div>
+</div>
+</div>
+</section>
 
 
 {% endblock %}

@@ -12,6 +12,9 @@ urlpatterns = [
     path("creadorHistoria/<personaje_id>/",creadorHistoria, name="creadorHistoria"),
     path("eliminarPersonaje/<personaje_id>/",eliminarPersonaje, name="eliminarPersonaje"),
     path("editarPersonaje/<personaje_id>/<profesion_id>/<familia_id>/",editarPersonaje, name="editarPersonaje"),
+    path("crearHistoria/<personaje_id>/",crearHistoria, name="crearHistoria"),
+    path("crearAvatarPersonaje/<personaje_id>/",crearAvatarPersonaje, name="crearAvatarPersonaje"),
+    path("detallePersonaje/<personaje_id>/",detallePersonaje, name="detallePersonaje"),
     
     
     

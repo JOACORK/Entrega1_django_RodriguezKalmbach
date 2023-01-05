@@ -1,8 +1,13 @@
-{% extends './padre.html' %}
-{% load static %}
-
-{% block contenidoEleccion %}
-
-    <h2>Historia</h2>
-    {{ nombre }}
+{% extends './padre.html' %} {% load static %} {% block contenidoEleccion %}
+<section id="about">
+  <div class="container px-4">
+    <div class="row gx-4 justify-content-center">
+      <div class="col-lg-8" id="crearPJ">
+        <h2> {{ mensaje }} </h2>
+        <h3>{{ personaje.nombre }}</h3>
+        <p> {{ historia.historia }} </p>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
