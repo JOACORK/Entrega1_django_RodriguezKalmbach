@@ -63,9 +63,10 @@ def cargarAvatar(request):
 
 
 def obtener_avatar(request):
-    lista = Avatar.objects.filter(user=request.user)
-    if len(lista)!= 0:
-        imagen=lista[0].imagen.url
-    else:
-        imagen="http://clipart-library.com/images_k/silhouette-head-shot/silhouette-head-shot-18.jpg"
+    if request.user.is_authenticated:
+        lista = Avatar.objects.filter(user=request.user)
+        if len(lista)!= 0:
+            imagen=lista[0].imagen.url
+        else:
+            imagen="http://clipart-library.com/images_k/silhouette-head-shot/silhouette-head-shot-18.jpg"
     return imagen

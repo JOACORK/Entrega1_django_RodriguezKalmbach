@@ -6,13 +6,49 @@
         <h2>Resultados de la búsqueda</h2>
         {% if personajes %}
         <ul>
-          {% for personaje in personajes %}
-          <li>{{ personaje.nombre }}</li>
-          <li>{{ personaje.raza }}</li>
-          <li>{{ personaje.edad }}</li>
-          <br />
-          {% endfor %}
-        </ul>
+          <table class="table table-condensed table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Raza</th>
+                    <th>Edad</th>
+                    {% if user.is_superuser %}
+                    <th>Usuario</th>
+                    {% endif %}                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for personaje in personajes %}
+                    <tr>
+                        <td>{{ personaje.idPersonaje }}</td>
+                        <td>{{ personaje.nombre }}</td>
+                        <td>{{ personaje.raza }}</td>
+                        <td>{{ personaje.edad }}</td>
+                        {% if user.is_superuser %}
+                        
+                        <td>{{ personaje.usuario }}</td>
+                        <td>   
+                            <a class="btn btn-sm btn-outline-danger" href="{% url 'eliminarPersonaje' personaje.idPersonaje %}">Eliminar Personaje</a>
+                        </td>
+                        <td>   
+                            <a class="btn btn-sm btn-outline-warning" href="{% url 'editarPersonaje' personaje.idPersonaje personaje.idProfesion personaje.idFamilia %}">Editar Personaje</a>
+                            <td> 
+                                <a class="btn btn-sm btn-outline-success" href="{% url 'crearHistoria' personaje.idPersonaje %}">Crear Historia</a>
+        
+                             </td>
+                             <td> 
+                                <a class="btn btn-sm btn-success" href="{% url 'detallePersonaje' personaje.idPersonaje  %}">Ver Detalle</a>
+                             </td>
+                            
+                        </td>
+                        {% endif %}
+    
+                    </tr>
+    
+                {% endfor %}
+            </tbody>
+        </table>
         {% else %}
         <p>
           Todavía no se ha creado ningún personaje con esas características!

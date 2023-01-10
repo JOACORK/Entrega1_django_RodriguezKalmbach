@@ -1,23 +1,25 @@
-{% extends './padre.html' %}
-
-{% load static %}
-
-{% block contenidoEleccion %}
-
+{% extends './padre.html' %} {% load static %} {% block contenidoEleccion %}
+<div class="container  justify-content-center align-items-center h-100">
+  <div class="row justify-content-center">
     <h2>Login usuario</h2>
+  </div>
+  <div class="row justify-content-center">
+    <form action="{% url 'login' %}" method="POST">
+      {% csrf_token %}
 
-    <form action="{% url 'login' %}" method="POST"> {% csrf_token %}
-            
-        <table>
-            {{ form.as_table }}
-        </table>
+      <table>
+        {{ form.as_table }}
+      </table>
 
-        <input type="submit" value="Ingresar">
+      <div class="content-center">
+        <input class="btn btn-sm btn-warning" type="submit" value="Ingresar" />
+
+        <a class="btn btn-sm btn-success" href="{% url 'signup' %}"
+          >Crear Usuario</a
+        >
+      </div>
     </form>
-    
-    {{ mensaje }}
-    <div class="row gx-4 justify-content-center ">
-        <a class="btn btn-lg btn-light" href="{% url 'signup' %}">No tenes usuario? Create uno!</a>
-    </div>
-    
+  </div>
+  {{ mensaje }}
+</div>
 {% endblock %}

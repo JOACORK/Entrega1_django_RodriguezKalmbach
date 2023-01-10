@@ -17,7 +17,6 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
-exec(open('start.py').read())
 
 
 if __name__ == '__main__':
