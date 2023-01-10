@@ -65,13 +65,14 @@ Con fines de poder replicar la aplicación por el docente:
 Es necesario crear una variable de entorno del sistema con el nombre: "REPLICATE_API_TOKEN"
 y debe copiar la siguiente api-token como valor del entorno: "952006b617ba2b59a77c40f1a31750d9a8c82ff5"
 
-
+---
+## Ignorar
 La siguiente línea puede ser una opción para usar StableDiffusion II sin límites de precios. Pero es una solución más compleja para aplicar. Queda en desarrollo.
 ```sh
 # La siguiente línea no es necesaria. 
 pip install diffusers transformers accelerate scipy safetensors
 ```
-
+---
 
 Correr proyecto en servidor local
 Crear BD
