@@ -22,6 +22,7 @@ Para esta entrega, la web cuenta con las siguientes funcionalidades:
 ## Estructura
 >### App PersonajesApp
 >- Posee toda la lógica para la creación y la búsqueda de personajes de la web. CRUD relacionado a personajes. Además de la navegación, los templates y los archivos statics del proyecto.  
+>- Posee una hoja python llamada funciones_logicas.py en donde se desarrollan (entre otras cosas) la conección a las APIs de IA.
 >---
 >### App AppRegisto
 >- Posee la lógica y los modelos para realizar CRUD de usuarios. Gestionar logins y logouts. 
@@ -61,7 +62,8 @@ pip install pychatgpt
 pip install replicate
 ```
 Con fines de poder replicar la aplicación por el docente:
-Es necesario crear una variable de entorno del sistema con el nombre;  debe copiar la siguiente api-token
+Es necesario crear una variable de entorno del sistema con el nombre: "REPLICATE_API_TOKEN"
+y debe copiar la siguiente api-token como valor del entorno: "952006b617ba2b59a77c40f1a31750d9a8c82ff5"
 
 
 La siguiente línea puede ser una opción para usar StableDiffusion II sin límites de precios. Pero es una solución más compleja para aplicar. Queda en desarrollo.
