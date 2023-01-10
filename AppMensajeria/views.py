@@ -17,10 +17,10 @@ def enviar_mensaje(request):
     
     if request.method == "POST":
         remitente = request.user
-        print(remitente)
+        
         #time.sleep(4)
         destinatario = request.POST['destinatario']
-        print(destinatario)
+        
         cuerpo = request.POST['cuerpo']
                
         existe_destinatario = User.objects.filter(username= destinatario)
@@ -58,6 +58,6 @@ def eliminar_mensajes(request, id):
     return render(request, "buzon_mensajes.html", {"mensajeria": mensajes,"avatar":obtener_avatar(request)})
 
 def responder_mensajes(request,usuario):   
-    print(usuario)
+    
     form = MensajeForm(initial={"destinatario":usuario})
     return render(request,"mensajeria.html",{"form":form,"avatar":obtener_avatar(request)})

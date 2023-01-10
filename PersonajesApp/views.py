@@ -96,7 +96,7 @@ def busquedaPersonaje(request):
 @login_required
 def buscar(request):
         import time
-        print("HOLA")
+        
         #time.sleep(4)
         if request.GET["nombre"]:
             #time.sleep(4)
@@ -107,7 +107,7 @@ def buscar(request):
             'relacion_personaje_familia_set__idFamilia'
             ).filter(nombre__icontains=nombre)
             #time.sleep(4)
-            print(personajes.values_list())
+            
             return render(
                 request,
                 "resultadosBusqueda.html",
@@ -139,7 +139,7 @@ def baulPersonajes(request):
     for fila in resultado:
         filas.append(fila)
 
-    #print(filas[0])
+    
     return render(request, "baulPersonajes.html", {"personajes": filas,"avatar":obtener_avatar(request)})
 
 @login_required
@@ -158,16 +158,16 @@ def eliminarPersonaje(request, personaje_id):
     personaje = DatosPersonaje.objects.get(idPersonaje= personaje_id)
    
     personaje.delete()
-    print(personaje)
+    
     personajes = DatosPersonaje.objects.all()
-    #print(personajes)
+    
 
     resultado = consulta_admin_personajes_sql(usuario)    
     filas = []
     for fila in resultado:
         filas.append(fila)
 
-    #print(filas[0])
+    
     return render(request, "baulPersonajes.html", {"personajes": filas})
     
     
@@ -227,27 +227,27 @@ def crearHistoria(request, personaje_id):
     prompt_chatGPT3 = f"""Usar semilla: "{semilla}". Estilo de J. R. R. Tolkien. Redactar en 200 palabras la hoja de vida de un personaje ficticio llamado  "{nombrePersonaje}", de raza {razaPersonaje}.Creció en una familia de nombre "{nombreFamilia}" que tiene {antiguedadFamilia} años de antigüedad. Históricamente la familia se dedicó a la {profesionFamilia}. "{nombrePersonaje}" ejerce la profesión de {profesionPersonaje} y tiene un conocimiento {expertisPersonaje}. {nombrePersonaje} tiene {aniosPersonaje} años. Cualidad única al azar, decidir al azar si tiene implicancias negativas, neutras o positivas. Desarrollar introducción y crecimiento del personaje en relación a su pueblo. Finalizar con evento narrativo que de inicio a una aventura."""
     # Chequeo si ya se creo una historia para el personaje
     historia_vieja = HistoriaPersonaje.objects.filter(idPersonaje_id=personaje_id)
-    print("nueva 0")
+    
     
     if len(historia_vieja)!= 0:
         if historia_vieja[0].historia != "Error al crear historia":
             historia = historia_vieja[0].historia
-            print("nueva 1")
+            
             return render(request,"crearHistoria.html",{"personaje":personaje,"historia":historia,"mensaje":"Historia creada con éxito!"})
         else:      
-            print("nueva 2")
+            
             historia_vieja.delete()      
             respuesta_chat, mensaje = send_message(prompt_chatGPT3)
             HistoriaPersonaje.objects.create(idPersonaje_id=personaje_id,historia = respuesta_chat)
             historia = HistoriaPersonaje.objects.filter(idPersonaje_id=personaje_id)[0].historia
-            print(historia)
+            
             return render(request,"crearHistoria.html",{"personaje":personaje,"historia":historia,"mensaje":mensaje})
     else:
-        print("nueva 4")
+        
         respuesta_chat, mensaje = send_message(prompt_chatGPT3)
         HistoriaPersonaje.objects.create(idPersonaje_id=personaje_id,historia = respuesta_chat)
         historia = HistoriaPersonaje.objects.filter(idPersonaje_id=personaje_id)[0].historia
-        print(historia)
+        
     return render(request,"crearHistoria.html",{"personaje":personaje,"historia":historia,"mensaje":mensaje})
 
 
@@ -280,7 +280,7 @@ def detallePersonaje(request, personaje_id):
     familia = DatosFamilia.objects.get(idFamilia = familia_id)
     
     avatarPersonaje= obtener_avatar_personaje(personaje_id)
-    print(avatarPersonaje)
+    
 
     
     try:

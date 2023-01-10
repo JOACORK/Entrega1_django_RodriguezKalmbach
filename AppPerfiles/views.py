@@ -42,31 +42,36 @@ def editarPerfilUsuario(request):
 
 @login_required
 def cargarAvatar(request):
-    print("hola1")
     if request.method == "POST":
-        print("hola2")
-
         miFormulario = AvatarForm(request.POST,request.FILES)
-        
         if miFormulario.is_valid():
-           # u = User.objects.get(username= request.user)
-            avatar= Avatar(user=request.user,imagen=request.FILES["imagen"])
+            
+            avatarViejo = Avatar.objects.filter(user_id=request.user.id)
+            if len(avatarViejo) != 0:
+                avatarViejo.delete()
+
+            avatar= Avatar(user=request.user,imagen=request.FILES["imagen"])        
             
             avatar.save()
-            
             return render(request,"inicio.html",{"mensaje":"Avatar agregado correctamente!"})
     else:
-        print("hola 3")
         miFormulario= AvatarForm()
-        print(miFormulario)
+        
     return render(request,"cargarAvatar.html", {"miFormulario": miFormulario,"usuario":request.user,"avatar":obtener_avatar(request)})
 
 
 def obtener_avatar(request):
-    if request.user.is_authenticated:
+    
+    if request.user.is_authenticated:    
+
         lista = Avatar.objects.filter(user=request.user)
+        
         if len(lista)!= 0:
             imagen=lista[0].imagen.url
-        else:
-            imagen="http://clipart-library.com/images_k/silhouette-head-shot/silhouette-head-shot-18.jpg"
+        else: 
+            imagen = "http://clipart-library.com/images_k/silhouette-head-shot/silhouette-head-shot-18.jpg"
+            
+            
+    else:
+        imagen= "http://clipart-library.com/images_k/silhouette-head-shot/silhouette-head-shot-18.jpg"
     return imagen

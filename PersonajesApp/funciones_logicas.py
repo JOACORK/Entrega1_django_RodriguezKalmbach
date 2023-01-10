@@ -25,14 +25,14 @@ def generar_avatar_personaje(raza,edad,profesionPersonaje):
     model_index_path = "stabilityai/stable-diffusion-2-base"
     scheduler = EulerDiscreteScheduler.from_pretrained(model_path, subfolder="scheduler")
     #pipe = StableDiffusionPipeline.from_pretrained(model_index_path,local_files_only=True,scheduler=scheduler, torch_dtype=torch.float16)
-    print("scheduler")
+    
     pipe = StableDiffusionPipeline.from_pretrained(model_path, scheduler=scheduler, torch_dtype=torch.float16)
 
-    print("pipe")
+    
     prompt=f"Illustration of an {edad} year old {raza_ajustada_prompt}'s face, Tolkien's Middle Earth style.  With the following phrase written at the base of the image: 'Throu, el {profesionPersonaje}'"
-    #print("prompt")
+    
     #image = pipe(prompt)[0]
-    print("image")
+    
     """
 
     
